@@ -3,15 +3,34 @@
     windows_subsystem = "windows"
 )]
 
-// Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
+use directories::ProjectDirs;
+use error_stack::{Report, ResultExt};
+use serde_with::SerializeDisplay;
+use thiserror::Error;
+
+mod db;
+
+#[derive(Error, SerializeDisplay, Debug)]
+#[error("while initializing application")]
+struct InitError;
+
 #[tauri::command]
-fn greet(name: &str) -> String {
-    format!("Hello, {}! You've been greeted from Rust!", name)
+async fn initialize() -> Result<(), Report<InitError>> {
+    let Some(project_dirs) = ProjectDirs::from(
+        "com.github.zependencies",
+        "Zependencies Developers",
+        "zependencies",
+    ) else {
+        return Err(Report::new(InitError).attach_printable("could not retrieve project folders"));
+    };
+    let _ = db::init(&project_dirs).await.change_context(InitError)?;
+    Ok(())
 }
 
 fn main() {
+    tracing_subscriber::fmt::init();
     tauri::Builder::default()
-        .invoke_handler(tauri::generate_handler![greet])
+        .invoke_handler(tauri::generate_handler![initialize])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }
