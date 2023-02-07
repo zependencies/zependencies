@@ -15,6 +15,7 @@ mod db;
 struct InitError;
 
 #[tauri::command]
+#[tracing::instrument]
 async fn initialize() -> Result<(), Report<InitError>> {
     let Some(project_dirs) = ProjectDirs::from(
         "com.github.zependencies",
@@ -23,7 +24,7 @@ async fn initialize() -> Result<(), Report<InitError>> {
     ) else {
         return Err(Report::new(InitError).attach_printable("could not retrieve project folders"));
     };
-    let _ = db::init(&project_dirs).await.change_context(InitError)?;
+    let _db = db::init(&project_dirs).await.change_context(InitError)?;
     Ok(())
 }
 
