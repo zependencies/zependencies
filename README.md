@@ -1,2 +1,3 @@
 # zependencies
-A tool to query rust dependencies
+
+A tool to query cargo dependency trees.
