@@ -1,3 +1,7 @@
+# Rust related
+target/
+
+
 # Logs
 logs
 *.log
