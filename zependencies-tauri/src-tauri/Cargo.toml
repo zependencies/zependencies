@@ -1,0 +1,33 @@
+[package]
+name = "zependencies-tauri"
+version = "0.0.0"
+description = "A Tauri App"
+license = "AGPL-3.0"
+repository = ""
+edition = "2021"
+rust-version = "1.57"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[build-dependencies]
+tauri-build = { version = "1.2", features = [] }
+
+[dependencies]
+directories = "4.0.1"
+error-stack = { version = "0.3.0", features = ["serde"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+serde_with = "2.2.0"
+sqlx = { version = "0.6.2", features = ["sqlite", "runtime-tokio-native-tls"] }
+tauri = { version = "1.2", features = ["shell-open"] }
+thiserror = "1.0.38"
+tracing = "0.1.37"
+tracing-subscriber = "0.3.16"
+
+[features]
+# by default Tauri runs in production mode
+# when `tauri dev` runs it is executed with `cargo run --no-default-features` if `devPath` is an URL
+default = ["custom-protocol"]
+# this feature is used used for production builds where `devPath` points to the filesystem
+# DO NOT remove this
+custom-protocol = ["tauri/custom-protocol"]
