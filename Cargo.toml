@@ -1,4 +1,5 @@
 [workspace]
 members = [
-	"zependencies-tauri/src-tauri"
+	"zependencies-common",
+	"zependencies-tauri/src-tauri",
 ]

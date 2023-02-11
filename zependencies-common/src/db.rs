@@ -7,13 +7,13 @@ use tracing::Instrument;
 
 #[derive(Error, SerializeDisplay, Debug)]
 #[error("while initializing database")]
-pub(crate) struct InitError;
+pub struct InitError;
 
 /// Initialize the database.
 ///
 /// This includes creating files and setting up its tables.
 #[tracing::instrument(skip_all)]
-pub(crate) async fn init(project_dirs: &ProjectDirs) -> Result<SqlitePool, Report<InitError>> {
+pub async fn init(project_dirs: &ProjectDirs) -> Result<SqlitePool, Report<InitError>> {
     let db_url = create_database(project_dirs)
         .await
         .attach_printable("failed to create database file")?;

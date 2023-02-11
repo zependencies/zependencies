@@ -3940,6 +3940,19 @@ dependencies = [
 ]
 
 [[package]]
+name = "zependencies-common"
+version = "0.0.0"
+dependencies = [
+ "directories",
+ "error-stack",
+ "serde",
+ "serde_with 2.2.0",
+ "sqlx",
+ "thiserror",
+ "tracing",
+]
+
+[[package]]
 name = "zependencies-tauri"
 version = "0.0.0"
 dependencies = [
@@ -3948,10 +3961,10 @@ dependencies = [
  "serde",
  "serde_json",
  "serde_with 2.2.0",
- "sqlx",
  "tauri",
  "tauri-build",
  "thiserror",
  "tracing",
  "tracing-subscriber",
+ "zependencies-common",
 ]

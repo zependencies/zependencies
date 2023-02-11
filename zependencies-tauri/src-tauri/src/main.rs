@@ -7,8 +7,7 @@ use directories::ProjectDirs;
 use error_stack::{Report, ResultExt};
 use serde_with::SerializeDisplay;
 use thiserror::Error;
-
-mod db;
+use zependencies_common::db;
 
 #[derive(Error, SerializeDisplay, Debug)]
 #[error("while initializing application")]

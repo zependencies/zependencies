@@ -1,0 +1,19 @@
+[package]
+name = "zependencies-common"
+version = "0.0.0"
+description = "Common functionality of zependencies frontends"
+license = "AGPL-3.0"
+repository = "https://github.com/zependencies/zependencies"
+edition = "2021"
+rust-version = "1.67.1"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+directories = "4.0.1"
+error-stack = { version = "0.3.0", features = ["serde"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_with = "2.2.0"
+sqlx = { version = "0.6.2", features = ["sqlite", "runtime-tokio-native-tls"] }
+thiserror = "1.0.38"
+tracing = "0.1.37"
